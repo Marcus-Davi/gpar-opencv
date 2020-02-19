@@ -19,7 +19,7 @@ while(1):
 
 
     # define range of blue color in HSV
-    lower_blue = np.array([110,80,80])
+    lower_blue = np.array([110,50,50])
     upper_blue = np.array([133,255,225])
 
 
@@ -30,15 +30,13 @@ while(1):
 
     for contour in contours:
         area = cv2.contourArea(contour)
-
         if(area > 800):
-		x,y,w,h = cv2.boundingRect(contour)
-		frame_rect = cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),10)
+	    x,y,w,h = cv2.boundingRect(contour)
 
-                pos = [x,y, w, h]
-                print(pos)
-        	cv2.imshow("tracking", frame_rect)
-
+	    frame_rect = cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),10)
+            pos = [x,y, w, h]
+            print(pos)
+            cv2.imshow("tracking", frame_rect)
     # Bitwise-AND mask and original image
     res = cv2.bitwise_and(frame,frame, mask= mask)
 
