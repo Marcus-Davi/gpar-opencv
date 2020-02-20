@@ -39,7 +39,7 @@ while(1):
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # Converte imagem de RGB para P&B
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Detecta cor vermelha
     lower_blue = np.array([0, 100, 100])
