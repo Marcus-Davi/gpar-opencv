@@ -69,7 +69,7 @@ while(1):
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
     img = cv2.resize(img, dim)
-
+    
     # Converte imagem de RGB para HSV
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
