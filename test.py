@@ -9,7 +9,7 @@ while(1):
     # Take each frame
     _, frame = cap.read()
 
-    # Inverte imagem para deixar "correta" a exibição
+    # Inverte imagem para deixar "correta" a exibicao
     frame = cv2.flip(frame,1)
 
     # marcus incluido
