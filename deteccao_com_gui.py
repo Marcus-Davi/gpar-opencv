@@ -18,18 +18,18 @@ paletainf = np.zeros((200,200,3), np.uint8)
 cv2.namedWindow(txt_inf)
 
 # create trackbars for color change
-cv2.createTrackbar('R',txt_inf,0,255,nothing)
-cv2.createTrackbar('G',txt_inf,0,255,nothing)
-cv2.createTrackbar('B',txt_inf,0,255,nothing)
+cv2.createTrackbar('H',txt_inf,0,180,nothing)
+cv2.createTrackbar('S',txt_inf,0,255,nothing)
+cv2.createTrackbar('V',txt_inf,0,255,nothing)
 
 # CALIBRA SUPERIOR
 paletasup = np.zeros((200,200,3), np.uint8)
 cv2.namedWindow(txt_sup)
 
 # create trackbars for color change
-cv2.createTrackbar('R',txt_sup,0,255,nothing)
-cv2.createTrackbar('G',txt_sup,0,255,nothing)
-cv2.createTrackbar('B',txt_sup,0,255,nothing)
+cv2.createTrackbar('H',txt_sup,0,180,nothing)
+cv2.createTrackbar('S',txt_sup,0,255,nothing)
+cv2.createTrackbar('V',txt_sup,0,255,nothing)
 
 
 # Read image.
@@ -41,22 +41,22 @@ while(1):
 
     #### CALIBRACAO INFERIOR #####
     cv2.imshow(txt_inf,paletainf)
-    rinf = cv2.getTrackbarPos('R',txt_inf)
-    ginf = cv2.getTrackbarPos('G',txt_inf)
-    binf = cv2.getTrackbarPos('B',txt_inf)
-    paletainf[:] = [binf,ginf,rinf]
-    pinf1 = [binf,ginf,rinf]
-    pinf = paletainf
+    hinf = cv2.getTrackbarPos('H',txt_inf)
+    sinf = cv2.getTrackbarPos('S',txt_inf)
+    vinf = cv2.getTrackbarPos('V',txt_inf)
+    paletainf[:] = [hinf,sinf,vinf]
+    pinf = paletainf[1][1][:]
+    paletainf = cv2.cvtColor(paletainf, cv2.COLOR_HSV2BGR)
 
     #### CALIBRACAO SUPERIOR #####
     cv2.imshow(txt_sup,paletasup)
-    rsup = cv2.getTrackbarPos('R',txt_sup)
-    gsup = cv2.getTrackbarPos('G',txt_sup)
-    bsup = cv2.getTrackbarPos('B',txt_sup)
-    paletasup[:] = [bsup,gsup,rsup]
-    psup1 = [bsup,gsup,rsup]
-    psup = paletasup
-
+    hsup = cv2.getTrackbarPos('H',txt_sup)
+    ssup = cv2.getTrackbarPos('S',txt_sup)
+    vsup = cv2.getTrackbarPos('V',txt_sup)
+    paletasup[:] = [hsup,ssup,vsup]
+    psup = paletasup[1][1][:]
+    paletasup = cv2.cvtColor(paletasup, cv2.COLOR_HSV2BGR)
+   
     # Take each frame
     _, img = cap.read()
 
@@ -69,18 +69,13 @@ while(1):
     height = int(img.shape[0] * scale_percent / 100)
     dim = (width, height)
     img = cv2.resize(img, dim)
-    
+
     # Converte imagem de RGB para HSV
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    pinf_hsv = cv2.cvtColor(pinf, cv2.COLOR_BGR2HSV)
-    psup_hsv = cv2.cvtColor(psup, cv2.COLOR_BGR2HSV)
-    #pinf_inv = cv2.cvtColor(pinf_hsv, cv2.COLOR_HSV2BGR)
-    pinf_hsv_1r1c = pinf_hsv[1][1][:]
-    psup_hsv_1r1c = psup_hsv[1][1][:]
-    #cv2.imshow('teste',pinf_inv)
+
     # Define cores detectaveis
-    lower_blue = np.array([pinf_hsv_1r1c])
-    upper_blue = np.array([psup_hsv_1r1c])
+    lower_blue = np.array([pinf])
+    upper_blue = np.array([psup])
     #print pinf1
     #print pinf_hsv_1r1c
     
