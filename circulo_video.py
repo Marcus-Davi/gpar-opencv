@@ -80,7 +80,7 @@ while(1):
         # Convert the circle parameters a, b and r to integers.
         detected_circles = np.uint16(np.around(detected_circles))
         print(detected_circles)
-
+ 
         for pt in detected_circles[0, :]:
             a, b, r = pt[0], pt[1], pt[2]
 
