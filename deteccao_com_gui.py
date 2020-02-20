@@ -86,7 +86,7 @@ while(1):
     erosion = cv2.erode(pb, kernel_er, iterations=3)
     cv2.imshow('erosion', erosion)
     # cv2.waitKey(0)
-
+    
     # Filtragem de imagem - Preenche vazios
     nf = 2
     kernel_dil = np.ones((nf, nf), np.uint8)
