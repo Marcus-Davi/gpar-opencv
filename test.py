@@ -9,6 +9,9 @@ while(1):
     # Take each frame
     _, frame = cap.read()
 
+    # Inverte imagem para deixar "correta" a exibição
+    frame = cv2.flip(frame,1)
+
     # marcus incluido
     blue = np.uint8([[[0,255,0 ]]])
     hsv_blue = cv2.cvtColor(blue,cv2.COLOR_BGR2HSV)
