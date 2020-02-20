@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
 import time
-from matplotlib import pyplot as plt
-import scipy
 
 # Read image.
 #img = cv2.imread('bola.jpg', cv2.IMREAD_COLOR)
