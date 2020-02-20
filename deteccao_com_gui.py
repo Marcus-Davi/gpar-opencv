@@ -45,7 +45,8 @@ while(1):
     ginf = cv2.getTrackbarPos('G',txt_inf)
     binf = cv2.getTrackbarPos('B',txt_inf)
     paletainf[:] = [binf,ginf,rinf]
-    pinf = [binf,ginf,rinf]
+    pinf1 = [binf,ginf,rinf]
+    pinf = paletainf
 
     #### CALIBRACAO SUPERIOR #####
     cv2.imshow(txt_sup,paletasup)
@@ -53,7 +54,8 @@ while(1):
     gsup = cv2.getTrackbarPos('G',txt_sup)
     bsup = cv2.getTrackbarPos('B',txt_sup)
     paletasup[:] = [bsup,gsup,rsup]
-    psup = [bsup,gsup,rsup]
+    psup1 = [bsup,gsup,rsup]
+    psup = paletasup
 
     # Take each frame
     _, img = cap.read()
@@ -70,10 +72,17 @@ while(1):
 
     # Converte imagem de RGB para HSV
     img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
+    pinf_hsv = cv2.cvtColor(pinf, cv2.COLOR_BGR2HSV)
+    psup_hsv = cv2.cvtColor(psup, cv2.COLOR_BGR2HSV)
+    #pinf_inv = cv2.cvtColor(pinf_hsv, cv2.COLOR_HSV2BGR)
+    pinf_hsv_1r1c = pinf_hsv[1][1][:]
+    psup_hsv_1r1c = psup_hsv[1][1][:]
+    #cv2.imshow('teste',pinf_inv)
     # Define cores detectaveis
-    lower_blue = np.array([pinf])
-    upper_blue = np.array([psup])
+    lower_blue = np.array([pinf_hsv_1r1c])
+    upper_blue = np.array([psup_hsv_1r1c])
+    #print pinf1
+    #print pinf_hsv_1r1c
     
     # Threshold the HSV image to get only blue colors
     pb = cv2.inRange(img_hsv, lower_blue, upper_blue)

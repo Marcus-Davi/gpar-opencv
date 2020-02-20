@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 def nothing(x):
     pass
@@ -18,7 +19,7 @@ cv2.createTrackbar('B','image',0,255,nothing)
 #cv2.createTrackbar(switch, 'image',0,1,nothing)
 
 while(1):
-    cv2.imshow('CALIBRA',paleta)
+    cv2.imshow('image',paleta)
     k = cv2.waitKey(1) & 0xFF
     if k == 27:
         break
@@ -33,5 +34,9 @@ while(1):
     #    img[:] = 0
     #else:
     paleta[:] = [b,g,r]
+    pcvt = cv2.cvtColor(paleta,cv2.COLOR_BGR2HSV)
+    pl = pcvt[1][1][:]
+    print pl
+    time.sleep(0.1)
 
 cv2.destroyAllWindows()
