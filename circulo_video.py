@@ -50,7 +50,7 @@ while(1):
     #cv2.imshow('Imagem P&B', pb)
     # cv2.waitKey(0)
 
-    # Filtragem de imagem - Reduz ruidos
+    # Filtragem de imagem - Reduz ruidos    
     nf = 2
     kernel = np.ones((nf, nf), np.uint8)
     erosion = cv2.erode(pb, kernel, iterations=3)
